@@ -226,13 +226,13 @@ const constellationData = {
   ursaMajor: {
     name: "Ursa Maior",
     stars: [
-      { id: 'um1', x: 540, y: 600, name: 'Dubhe' },
-      { id: 'um2', x: 530, y: 700, name: 'Merak' },
-      { id: 'um3', x: 430, y: 660, name: 'Phecda' },
-      { id: 'um4', x: 420, y: 620, name: 'Megrez' },
-      { id: 'um5', x: 350, y: 580, name: 'Alioth' },
-      { id: 'um6', x: 270, y: 500, name: 'Mizar' },
-      { id: 'um7', x: 200, y: 560, name: 'Alkaid' }
+      { id: 'um1', x: 540, y: 400, name: 'Dubhe' },
+      { id: 'um2', x: 530, y: 520, name: 'Merak' },
+      { id: 'um3', x: 430, y: 540, name: 'Phecda' },
+      { id: 'um4', x: 420, y: 480, name: 'Megrez' },
+      { id: 'um5', x: 350, y: 460, name: 'Alioth' },
+      { id: 'um6', x: 290, y: 400, name: 'Mizar' },
+      { id: 'um7', x: 200, y: 480, name: 'Alkaid' }
     ],
     connections: [
       ['um1', 'um2'], ['um2', 'um3'], ['um3', 'um4'],
