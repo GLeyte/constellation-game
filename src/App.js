@@ -293,14 +293,6 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted, windowSize }) 
       {/* Brilho da estrela polar */}
       {star.isPolar && (
         <>
-          {/* <circle
-            cx={xPos}
-            cy={yPos}
-            r={size * 3}
-            fill="url(#polarGradient)"
-            style={{ animation: 'pulse 2s infinite' }}
-            pointerEvents="none"
-          /> */}
           <circle
             cx={xPos}
             cy={yPos}
@@ -368,6 +360,20 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted, windowSize }) 
           {star.name}
         </text>
       )}
+
+      {/* Número da estrela */}
+      <text
+        x={xPos}
+        y={yPos + size*2} 
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fill="#ffffffff"
+        fontSize={Math.max(10, size)}
+        fontWeight="bold"
+        style={{ pointerEvents: 'none' }}
+      >
+        {star.id.slice(-1)}
+      </text>
     </g>
   );
 };
