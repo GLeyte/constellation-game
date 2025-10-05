@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/constellation-game/static/css/main.e6c13ad2.css",
-    "main.js": "/constellation-game/static/js/main.0fb4ecff.js",
+    "main.js": "/constellation-game/static/js/main.afe74317.js",
     "static/js/453.0e614e6e.chunk.js": "/constellation-game/static/js/453.0e614e6e.chunk.js",
     "index.html": "/constellation-game/index.html",
     "main.e6c13ad2.css.map": "/constellation-game/static/css/main.e6c13ad2.css.map",
-    "main.0fb4ecff.js.map": "/constellation-game/static/js/main.0fb4ecff.js.map",
+    "main.afe74317.js.map": "/constellation-game/static/js/main.afe74317.js.map",
     "453.0e614e6e.chunk.js.map": "/constellation-game/static/js/453.0e614e6e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.0fb4ecff.js"
+    "static/js/main.afe74317.js"
   ]
 }
