@@ -581,7 +581,6 @@ const ConstellationGame = () => {
             </div>
             <div style={styles.scorePanel}>
               <div style={styles.score}>Constellations: {completedConstellations.length}/2</div>
-              </div>
             </div>
           </div>
         </div>
