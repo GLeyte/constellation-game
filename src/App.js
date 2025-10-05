@@ -226,13 +226,13 @@ const constellationData = {
   ursaMajor: {
     name: "Ursa Maior",
     stars: [
-      { id: 'um1', x: 540, y: 800, name: 'Dubhe' },
-      { id: 'um2', x: 530, y: 900, name: 'Merak' },
-      { id: 'um3', x: 430, y: 860, name: 'Phecda' },
-      { id: 'um4', x: 420, y: 820, name: 'Megrez' },
-      { id: 'um5', x: 350, y: 780, name: 'Alioth' },
-      { id: 'um6', x: 270, y: 700, name: 'Mizar' },
-      { id: 'um7', x: 200, y: 760, name: 'Alkaid' }
+      { id: 'um1', x: 540, y: 600, name: 'Dubhe' },
+      { id: 'um2', x: 530, y: 700, name: 'Merak' },
+      { id: 'um3', x: 430, y: 660, name: 'Phecda' },
+      { id: 'um4', x: 420, y: 620, name: 'Megrez' },
+      { id: 'um5', x: 350, y: 580, name: 'Alioth' },
+      { id: 'um6', x: 270, y: 500, name: 'Mizar' },
+      { id: 'um7', x: 200, y: 560, name: 'Alkaid' }
     ],
     connections: [
       ['um1', 'um2'], ['um2', 'um3'], ['um3', 'um4'],
@@ -243,13 +243,13 @@ const constellationData = {
   ursaMinor: {
     name: "Ursa Menor",
     stars: [
-      { id: 'umin1', x: 700, y: 200, name: 'Polaris', isPolar: true },
-      { id: 'umin2', x: 630, y: 240, name: 'Yildun' },
-      { id: 'umin3', x: 570, y: 280, name: 'Epsilon UMi' },
-      { id: 'umin4', x: 500, y: 440, name: 'Delta UMi' },
-      { id: 'umin5', x: 400, y: 480, name: 'Pherkad' },
-      { id: 'umin6', x: 460, y: 500, name: 'Kochab' },
-      { id: 'umin7', x: 440, y: 420, name: 'Zeta UMi' }
+      { id: 'umin1', x: 1300, y: 240, name: 'Polaris', isPolar: true },
+      { id: 'umin2', x: 1200, y: 260, name: 'Yildun' },
+      { id: 'umin3', x: 1100, y: 280, name: 'Epsilon UMi' },
+      { id: 'umin4', x: 1000, y: 330, name: 'Delta UMi' },
+      { id: 'umin5', x: 900, y: 380, name: 'Pherkad' },
+      { id: 'umin6', x: 960, y: 390, name: 'Kochab' },
+      { id: 'umin7', x: 940, y: 320, name: 'Zeta UMi' }
     ],
     connections: [
       ['umin1', 'umin2'], ['umin2', 'umin3'], ['umin3', 'umin4'],
