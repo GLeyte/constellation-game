@@ -243,9 +243,9 @@ const constellationData = {
   ursaMinor: {
     name: "Ursa Menor",
     stars: [
-      { id: 'umin1', x: 70, y: 20, name: 'Polaris', isPolar: true },
-      { id: 'umin2', x: 63, y: 24, name: 'Yildun' },
-      { id: 'umin3', x: 57, y: 28, name: 'Epsilon UMi' },
+      { id: 'umin1', x: 70, y: 30, name: 'Polaris', isPolar: true },
+      { id: 'umin2', x: 63, y: 34, name: 'Yildun' },
+      { id: 'umin3', x: 57, y: 38, name: 'Epsilon UMi' },
       { id: 'umin4', x: 50, y: 44, name: 'Delta UMi' },
       { id: 'umin5', x: 40, y: 48, name: 'Pherkad' },
       { id: 'umin6', x: 46, y: 50, name: 'Kochab' },
@@ -253,7 +253,8 @@ const constellationData = {
     ],
     connections: [
       ['umin1', 'umin2'], ['umin2', 'umin3'], ['umin3', 'umin4'],
-      ['umin4', 'umin6'], ['umin5', 'umin6'], ['umin5', 'umin7']
+      ['umin4', 'umin6'], ['umin5', 'umin6'], ['umin5', 'umin7'], 
+      ['umin4', 'umin7']
     ]
   }
 };
