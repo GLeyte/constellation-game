@@ -648,7 +648,7 @@ const ConstellationGame = () => {
                 color: '#fbbf24',
                 fontWeight: 'bold'
               }}>
-                Now let's go back to Figma!!
+                Now let's go back to Figma!
               </div>
             </div>
           </div>
