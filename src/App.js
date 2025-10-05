@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // CSS Styles
 const styles = {
@@ -35,7 +35,7 @@ const styles = {
     alignItems: 'flex-start'
   },
   title: {
-    fontSize: '2rem',
+    fontSize: 'clamp(1.5rem, 3vw, 2rem)',
     fontWeight: 'bold',
     marginBottom: '0.5rem',
     display: 'flex',
@@ -44,7 +44,7 @@ const styles = {
     textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
   },
   message: {
-    fontSize: '1.125rem',
+    fontSize: 'clamp(1rem, 2vw, 1.125rem)',
     color: '#fbbf24',
     textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
     animation: 'fadeIn 0.5s ease-in'
@@ -57,7 +57,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.1)'
   },
   score: {
-    fontSize: '1.5rem',
+    fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
     fontWeight: 'bold',
     color: '#fbbf24',
     marginBottom: '0.25rem',
@@ -77,7 +77,7 @@ const styles = {
     padding: '1.5rem',
     borderRadius: '0.75rem',
     zIndex: 20,
-    maxWidth: '400px',
+    maxWidth: 'min(400px, 90vw)',
     textAlign: 'center',
     border: '2px solid rgba(255, 215, 0, 0.3)',
     boxShadow: '0 4px 20px rgba(0, 0, 0, 0.5)',
@@ -85,7 +85,7 @@ const styles = {
   },
   instructionText: {
     marginBottom: '0.5rem',
-    fontSize: '1rem',
+    fontSize: 'clamp(0.9rem, 2vw, 1rem)',
     lineHeight: '1.5'
   },
   instructionHighlight: {
@@ -120,12 +120,12 @@ const styles = {
     flexWrap: 'wrap'
   },
   button: {
-    padding: '0.75rem 1.5rem',
+    padding: 'clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 3vw, 1.5rem)',
     borderRadius: '0.5rem',
     border: 'none',
     cursor: 'pointer',
     fontWeight: '600',
-    fontSize: '1rem',
+    fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
     transition: 'all 0.3s ease',
     display: 'flex',
     alignItems: 'center',
@@ -221,35 +221,35 @@ const cssAnimations = `
   }
 `;
 
-// Dados das constelações
+// Dados das constelações com posições em porcentagem
 const constellationData = {
   ursaMajor: {
     name: "Ursa Maior",
     stars: [
-      { id: 'um1', x: 700, y: 410, name: 'Dubhe' },
-      { id: 'um2', x: 680, y: 510, name: 'Merak' },
-      { id: 'um3', x: 500, y: 540, name: 'Phecda' },
-      { id: 'um4', x: 460, y: 500, name: 'Megrez' },
-      { id: 'um5', x: 380, y: 480, name: 'Alioth' },
-      { id: 'um6', x: 320, y: 420, name: 'Mizar' },
-      { id: 'um7', x: 200, y: 480, name: 'Alkaid' }
+      { id: 'um1', x: 60, y: 65, name: 'Dubhe' },
+      { id: 'um2', x: 58, y: 80, name: 'Merak' },
+      { id: 'um3', x: 47, y: 85, name: 'Phecda' },
+      { id: 'um4', x: 42, y: 74, name: 'Megrez' },
+      { id: 'um5', x: 33, y: 72, name: 'Alioth' },
+      { id: 'um6', x: 27, y: 68, name: 'Mizar' },
+      { id: 'um7', x: 15, y: 75, name: 'Alkaid' }
     ],
     connections: [
-      ['um7', 'um6'], ['um6', 'um5'], ['um5', 'um4'],
-      ['um4', 'um3'], ['um3', 'um2'], ['um2', 'um1'],
+      ['um1', 'um2'], ['um2', 'um3'], ['um3', 'um4'],
+      ['um4', 'um5'], ['um5', 'um6'], ['um6', 'um7'],
       ['um4', 'um1']
     ]
   },
   ursaMinor: {
     name: "Ursa Menor",
     stars: [
-      { id: 'umin1', x: 1300, y: 240, name: 'Polaris', isPolar: true },
-      { id: 'umin2', x: 1200, y: 260, name: 'Yildun' },
-      { id: 'umin3', x: 1100, y: 280, name: 'Epsilon UMi' },
-      { id: 'umin4', x: 1000, y: 330, name: 'Delta UMi' },
-      { id: 'umin5', x: 900, y: 380, name: 'Pherkad' },
-      { id: 'umin6', x: 960, y: 390, name: 'Kochab' },
-      { id: 'umin7', x: 940, y: 320, name: 'Zeta UMi' }
+      { id: 'umin1', x: 70, y: 20, name: 'Polaris', isPolar: true },
+      { id: 'umin2', x: 63, y: 24, name: 'Yildun' },
+      { id: 'umin3', x: 57, y: 28, name: 'Epsilon UMi' },
+      { id: 'umin4', x: 50, y: 44, name: 'Delta UMi' },
+      { id: 'umin5', x: 40, y: 48, name: 'Pherkad' },
+      { id: 'umin6', x: 46, y: 50, name: 'Kochab' },
+      { id: 'umin7', x: 44, y: 42, name: 'Zeta UMi' }
     ],
     connections: [
       ['umin1', 'umin2'], ['umin2', 'umin3'], ['umin3', 'umin4'],
@@ -259,10 +259,14 @@ const constellationData = {
 };
 
 // Componente Estrela
-const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
+const Star = ({ star, isSelected, isConnected, onClick, isHinted, windowSize }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const baseSize = star.isPolar ? 16 : 10;
-  const size = isSelected || isHovered ? baseSize + 4 : baseSize;
+  
+  // Calcular tamanhos responsivos baseados no tamanho da janela
+  const minDimension = Math.min(windowSize.width, windowSize.height);
+  const baseSizeMultiplier = minDimension / 100;
+  const baseSize = star.isPolar ? baseSizeMultiplier * 2 : baseSizeMultiplier * 1.2;
+  const size = isSelected || isHovered ? baseSize * 1.4 : baseSize;
   
   const starStyle = {
     cursor: 'pointer',
@@ -272,6 +276,10 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
   const starClass = isSelected ? 'star-selected' : 
                     isConnected ? 'star-connected' : 
                     'star-glow';
+  
+  // Calcular posições em pixels baseadas em porcentagem
+  const xPos = (star.x * windowSize.width) / 100;
+  const yPos = (star.y * windowSize.height) / 100;
   
   return (
     <g
@@ -284,18 +292,18 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
       {/* Brilho da estrela polar */}
       {star.isPolar && (
         <>
-          <circle
-            cx={star.x}
-            cy={star.y}
-            r="35"
+          {/* <circle
+            cx={xPos}
+            cy={yPos}
+            r={size * 3}
             fill="url(#polarGradient)"
             style={{ animation: 'pulse 2s infinite' }}
             pointerEvents="none"
-          />
+          /> */}
           <circle
-            cx={star.x}
-            cy={star.y}
-            r="50"
+            cx={xPos}
+            cy={yPos}
+            r={size * 4}
             fill="url(#polarOuterGlow)"
             opacity="0.3"
             pointerEvents="none"
@@ -306,9 +314,9 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
       {/* Halo de seleção/dica */}
       {(isSelected || isHinted) && (
         <circle
-          cx={star.x}
-          cy={star.y}
-          r={size + 10}
+          cx={xPos}
+          cy={yPos}
+          r={size * 2}
           fill="none"
           stroke={isSelected ? '#FFD700' : '#FFA500'}
           strokeWidth="2"
@@ -321,12 +329,12 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
       
       {/* Estrela principal */}
       <circle
-        cx={star.x}
-        cy={star.y}
+        cx={xPos}
+        cy={yPos}
         r={size}
         fill={star.isPolar ? '#FFD700' : (isConnected ? '#00BFFF' : '#FFFFFF')}
         stroke={isSelected ? '#FFD700' : (isHinted ? '#FFA500' : '#87CEEB')}
-        strokeWidth={isSelected || isHinted ? '3' : '2'}
+        strokeWidth={Math.max(2, size / 5)}
         style={{
           animation: star.isPolar ? 'glow 2s infinite' : 'none'
         }}
@@ -334,8 +342,8 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
       
       {/* Núcleo brilhante */}
       <circle
-        cx={star.x}
-        cy={star.y}
+        cx={xPos}
+        cy={yPos}
         r={size / 2.5}
         fill="white"
         opacity="0.9"
@@ -345,11 +353,11 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
       {/* Nome da estrela */}
       {(isSelected || isHovered || star.isPolar) && (
         <text
-          x={star.x}
-          y={star.y - size - 12}
+          x={xPos}
+          y={yPos - size - 12}
           textAnchor="middle"
           fill="white"
-          fontSize="13"
+          fontSize={Math.max(12, baseSizeMultiplier * 1.5)}
           fontWeight="bold"
           style={{ 
             textShadow: '2px 2px 4px rgba(0,0,0,0.9)',
@@ -364,17 +372,25 @@ const Star = ({ star, isSelected, isConnected, onClick, isHinted }) => {
 };
 
 // Componente Linha de Conexão
-const Connection = ({ start, end, isComplete }) => {
+const Connection = ({ start, end, isComplete, windowSize }) => {
   const lineClass = isComplete ? 'line-complete' : 'line-active';
+  
+  // Calcular posições em pixels
+  const x1 = (start.x * windowSize.width) / 100;
+  const y1 = (start.y * windowSize.height) / 100;
+  const x2 = (end.x * windowSize.width) / 100;
+  const y2 = (end.y * windowSize.height) / 100;
+  
+  const strokeWidth = Math.max(2, Math.min(windowSize.width, windowSize.height) / 300);
   
   return (
     <line
-      x1={start.x}
-      y1={start.y}
-      x2={end.x}
-      y2={end.y}
+      x1={x1}
+      y1={y1}
+      x2={x2}
+      y2={y2}
       stroke={isComplete ? '#00BFFF' : '#FFD700'}
-      strokeWidth="3"
+      strokeWidth={strokeWidth}
       opacity={isComplete ? 0.8 : 0.7}
       strokeDasharray={isComplete ? "0" : "8,4"}
       className={lineClass}
@@ -397,11 +413,25 @@ const ConstellationGame = () => {
   const [backgroundStars, setBackgroundStars] = useState([]);
   const [showInstructions, setShowInstructions] = useState(true);
   const [hoveredButton, setHoveredButton] = useState(null);
+  const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const svgRef = useRef(null);
+
+  // Atualizar tamanho da janela
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Gerar estrelas de fundo
   useEffect(() => {
     const stars = [];
-    for (let i = 0; i < 200; i++) {
+    const starCount = Math.min(200, Math.floor((windowSize.width * windowSize.height) / 10000));
+    
+    for (let i = 0; i < starCount; i++) {
       stars.push({
         x: Math.random() * 100,
         y: Math.random() * 100,
@@ -416,7 +446,7 @@ const ConstellationGame = () => {
     // Esconder instruções após 6 segundos
     const timer = setTimeout(() => setShowInstructions(false), 6000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [windowSize]);
 
   const handleStarClick = (star) => {
     const lastStar = selectedStars[selectedStars.length - 1];
@@ -543,7 +573,7 @@ const ConstellationGame = () => {
           <div style={styles.headerContent}>
             <div>
               <h1 style={styles.title}>
-                <span style={{ fontSize: '2.5rem' }}>🌌</span>
+                <span style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)' }}>🌌</span>
                 Jogo das Constelações
               </h1>
               <p style={styles.message}>{message}</p>
@@ -573,7 +603,7 @@ const ConstellationGame = () => {
         )}
 
         {/* Área do Jogo */}
-        <svg style={styles.gameArea}>
+        <svg ref={svgRef} style={styles.gameArea}>
           {/* Definições SVG */}
           <defs>
             <radialGradient id="polarGradient">
@@ -595,13 +625,27 @@ const ConstellationGame = () => {
             constellation.connections.map((conn, i) => {
               const start = constellation.stars.find(s => s.id === conn[0]);
               const end = constellation.stars.find(s => s.id === conn[1]);
-              return <Connection key={`${constellation.name}-${i}`} start={start} end={end} isComplete={true} />;
+              return (
+                <Connection 
+                  key={`${constellation.name}-${i}`} 
+                  start={start} 
+                  end={end} 
+                  isComplete={true}
+                  windowSize={windowSize}
+                />
+              );
             })
           )}
           
           {/* Conexões atuais */}
           {connections.map((conn, i) => (
-            <Connection key={i} start={conn.start} end={conn.end} isComplete={false} />
+            <Connection 
+              key={i} 
+              start={conn.start} 
+              end={conn.end} 
+              isComplete={false}
+              windowSize={windowSize}
+            />
           ))}
           
           {/* Estrelas */}
@@ -617,6 +661,7 @@ const ConstellationGame = () => {
                   isConnected={isCompleted}
                   onClick={handleStarClick}
                   isHinted={isHinted}
+                  windowSize={windowSize}
                 />
               );
             })
