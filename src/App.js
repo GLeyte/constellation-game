@@ -224,7 +224,7 @@ const cssAnimations = `
 // Dados das constelações com posições em porcentagem
 const constellationData = {
   ursaMajor: {
-    name: "Ursa Maior",
+    name: "Ursa Major",
     stars: [
       { id: 'um1', x: 60, y: 65, name: 'Dubhe' },
       { id: 'um2', x: 58, y: 80, name: 'Merak' },
@@ -241,7 +241,7 @@ const constellationData = {
     ]
   },
   ursaMinor: {
-    name: "Ursa Menor",
+    name: "Ursa Minor",
     stars: [
       { id: 'umin1', x: 70, y: 30, name: 'Polaris', isPolar: true },
       { id: 'umin2', x: 63, y: 34, name: 'Yildun' },
@@ -409,7 +409,7 @@ const ConstellationGame = () => {
   const [connections, setConnections] = useState([]);
   const [completedConstellations, setCompletedConstellations] = useState([]);
   const [score, setScore] = useState(0);
-  const [message, setMessage] = useState("Conecte as estrelas para formar as constelações!");
+  const [message, setMessage] = useState("Connect the stars to form the constellations!");
   const [hintedConstellation, setHintedConstellation] = useState(null);
   const [backgroundStars, setBackgroundStars] = useState([]);
   const [showInstructions, setShowInstructions] = useState(true);
@@ -485,17 +485,17 @@ const ConstellationGame = () => {
     if (!completedConstellations.find(c => c.name === constellation.name)) {
       setCompletedConstellations([...completedConstellations, constellation]);
       setScore(score + 100);
-      setMessage(`🌟 Parabéns! Você formou a ${constellation.name}!`);
+      setMessage(`🌟 Congratulations! You graduated ${constellation.name}!`);
       setSelectedStars([]);
       setConnections([]);
       
       if (completedConstellations.length === 0) {
         setTimeout(() => {
-          setMessage("Excelente! Agora forme a outra constelação!");
+          setMessage("Excellent! Now form the other constellation!");
         }, 3000);
       } else {
         setTimeout(() => {
-          setMessage("🎉 Incrível! Você completou todas as constelações!");
+          setMessage("🎉 Awesome! You've completed all the constellations!");
         }, 3000);
       }
     }
@@ -504,10 +504,10 @@ const ConstellationGame = () => {
   const showHint = (constellationName) => {
     const constellation = constellationData[constellationName];
     setHintedConstellation(constellation);
-    setMessage(`💡 Mostrando as estrelas da ${constellation.name}`);
+    setMessage(`💡 Showing the stars of ${constellation.name}`);
     setTimeout(() => {
       setHintedConstellation(null);
-      setMessage("Continue conectando as estrelas!");
+      setMessage("Keep connecting the stars!");
     }, 3000);
   };
 
@@ -516,7 +516,7 @@ const ConstellationGame = () => {
     setConnections([]);
     setCompletedConstellations([]);
     setScore(0);
-    setMessage("Conecte as estrelas para formar as constelações!");
+    setMessage("Connect the stars to form the constellations!");
     setShowInstructions(true);
     setTimeout(() => setShowInstructions(false), 6000);
   };
@@ -575,14 +575,12 @@ const ConstellationGame = () => {
             <div>
               <h1 style={styles.title}>
                 <span style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)' }}>🌌</span>
-                Jogo das Constelações
+                Constellations Game
               </h1>
               <p style={styles.message}>{message}</p>
             </div>
             <div style={styles.scorePanel}>
-              <div style={styles.score}>Pontuação: {score}</div>
-              <div style={styles.constellationCount}>
-                Constelações: {completedConstellations.length}/2
+              <div style={styles.score}>Constellations: {completedConstellations.length}/2</div>
               </div>
             </div>
           </div>
@@ -592,14 +590,62 @@ const ConstellationGame = () => {
         {showInstructions && (
           <div style={styles.instructions}>
             <p style={styles.instructionText}>
-              👆 Clique nas estrelas em sequência para conectá-las
+              👆 Click on the stars in sequence to connect them
             </p>
             <p style={styles.instructionText}>
-              ✨ Forme as constelações Ursa Maior e Ursa Menor
+              ✨ Form the constellations Ursa Major and Ursa Minor
             </p>
             <p style={styles.instructionHighlight}>
-              ⭐ A Estrela Polar (Polaris) está brilhando!
+              ⭐ The North Star (Polaris) is shining!
             </p>
+          </div>
+        )}
+
+        {/* End game - Vitória! */}
+        {completedConstellations.length === 2 && (
+          <div style={{
+            ...styles.instructions,
+            backgroundColor: 'rgba(255, 215, 0, 0.1)',
+            border: '2px solid rgba(255, 215, 0, 0.5)',
+            animation: 'slideDown 0.5s ease-out, pulse 2s infinite',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h2 style={{
+              fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+              color: '#FFD700',
+              marginBottom: '1rem',
+              textShadow: '2px 2px 8px rgba(0,0,0,0.8)'
+            }}>
+              🎉 Congratulations! 🎉
+            </h2>
+            <p style={{
+              ...styles.instructionText,
+              fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+              marginBottom: '1rem'
+            }}>
+              ✨ You managed to identify the constellations!
+            </p>
+            <p style={{
+              ...styles.instructionText,
+              marginBottom: '1rem'
+            }}>
+              🌟 Ursa Major and Ursa Minor have been successfully connected!
+            </p>
+            <div style={{
+              display: 'flex',
+              gap: '1rem',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: '1.5rem'
+            }}>
+              <div style={{
+                fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
+                color: '#fbbf24',
+                fontWeight: 'bold'
+              }}>
+                Now let's go back to Figma!!
+              </div>
+            </div>
           </div>
         )}
 
@@ -679,7 +725,7 @@ const ConstellationGame = () => {
               onMouseLeave={() => setHoveredButton(null)}
               disabled={completedConstellations.find(c => c.name === "Ursa Maior")}
             >
-              💡 Dica: Ursa Maior
+              💡 Hint: Big Dipper
             </button>
             <button
               onClick={() => showHint('ursaMinor')}
@@ -688,7 +734,7 @@ const ConstellationGame = () => {
               onMouseLeave={() => setHoveredButton(null)}
               disabled={completedConstellations.find(c => c.name === "Ursa Menor")}
             >
-              💡 Dica: Ursa Menor
+              💡 Hint: Ursa Minor
             </button>
             <button
               onClick={() => { setSelectedStars([]); setConnections([]); }}
@@ -696,7 +742,7 @@ const ConstellationGame = () => {
               onMouseEnter={() => setHoveredButton('clear')}
               onMouseLeave={() => setHoveredButton(null)}
             >
-              🔄 Limpar Seleção
+              🔄 Clear Selection
             </button>
             <button
               onClick={resetGame}
@@ -704,7 +750,7 @@ const ConstellationGame = () => {
               onMouseEnter={() => setHoveredButton('reset')}
               onMouseLeave={() => setHoveredButton(null)}
             >
-              🎮 Reiniciar Jogo
+              🎮 Restart Game
             </button>
           </div>
         </div>
